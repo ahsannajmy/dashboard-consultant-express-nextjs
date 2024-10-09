@@ -1,0 +1,18 @@
+services:
+  backend:
+    container_name: "dashboard-api"
+    build: ./backend
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  frontend:
+    container_name: "dashboard-ui"
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
