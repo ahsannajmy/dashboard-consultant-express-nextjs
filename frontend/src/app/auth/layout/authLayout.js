@@ -1,6 +1,4 @@
-import { LoginForm } from "./components/loginForm";
-
-export default function Login() {
+export const AuthLayout = ({ children }) => {
   return (
     <>
       <div className="flex">
@@ -13,10 +11,10 @@ export default function Login() {
         </div>
         <div className="bg-secondary w-1/3 h-screen">
           <div className="flex items-center justify-center h-full">
-            <LoginForm title="Login Here" />
+            {children}
           </div>
         </div>
       </div>
     </>
   );
-}
+};

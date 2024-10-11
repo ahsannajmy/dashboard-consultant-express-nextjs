@@ -2,10 +2,16 @@ require("dotenv").config();
 const express = require("express");
 const mainApp = express();
 const port = process.env.SERVER_PORT;
+const cors = require("cors");
 
 const rootRouter = express.Router();
 
 mainApp.use(express.json());
+mainApp.use(
+  cors({
+    origin: process.env.FE_ORIGIN,
+  })
+);
 
 rootRouter.get("/", async (req, res) => {
   return res.status(200).send({
