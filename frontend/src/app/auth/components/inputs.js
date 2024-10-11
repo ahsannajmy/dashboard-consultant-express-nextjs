@@ -6,6 +6,7 @@ export const AuthInput = (props) => {
         className="text-gray-500 rounded-md p-2 text-xs drop-shadow-lg"
         type={props.type}
         name={props.name}
+        placeholder={props.title}
       ></input>
     </>
   );

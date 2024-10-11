@@ -4,9 +4,12 @@ import { useRouter } from "next/navigation";
 import { LoginForm } from "../components/loginForm";
 import { AuthLayout } from "../layout/authLayout";
 import { fetchLogin } from "../handler/apiHandler";
+import { useContext } from "react";
+import { AuthContext } from "@/app/context/authContext";
 
 export default function Login() {
   const router = useRouter();
+  const { setUserData } = useContext(AuthContext);
 
   async function loginSubmit(e) {
     e.preventDefault();
@@ -21,7 +24,8 @@ export default function Login() {
         "/users/login",
         "POST",
         JSON.stringify(formObject),
-        router
+        router,
+        setUserData
       );
     } catch (err) {
       console.log(err.message);

@@ -60,6 +60,7 @@ router.post("/login", async (req, res) => {
     return res.status(200).send({
       status: "success",
       message: "Login successfull",
+      token: token,
     });
   } catch (err) {
     return res.status(500).send({

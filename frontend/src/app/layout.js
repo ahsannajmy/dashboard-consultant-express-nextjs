@@ -1,6 +1,7 @@
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AuthProvider from "./context/authContext";
 
 export const metadata = {
   title: "Dashboard Consultant",
@@ -11,7 +12,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        {children}
+        <AuthProvider>{children}</AuthProvider>
         <ToastContainer position="top-center" theme="dark" autoClose={1000} />
       </body>
     </html>
