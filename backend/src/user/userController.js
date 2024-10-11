@@ -2,6 +2,7 @@ const express = require("express");
 const prisma = require("../db/index");
 const { hashPassword } = require("../utils/passwordHasher");
 const router = express.Router();
+const bcrypt = require("bcrypt");
 
 router.get("/", async (req, res) => {
   const user = await prisma.user.findMany();
@@ -11,6 +12,42 @@ router.get("/", async (req, res) => {
     message: "User retrieved",
     data: user,
   });
+});
+
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        email: email,
+      },
+    });
+
+    if (!user) {
+      return res.status(401).send({
+        status: "failed",
+        message: "Incorrect credentials",
+      });
+    }
+
+    const checkPassword = await bcrypt.compare(password, user.password);
+    if (!checkPassword) {
+      return res.status(401).send({
+        status: "failed",
+        message: "Incorrect credentials",
+      });
+    }
+
+    return res.status(200).send({
+      status: "success",
+      message: "Login successfull",
+    });
+  } catch (err) {
+    return res.status(500).send({
+      status: "failed",
+      message: err.message,
+    });
+  }
 });
 
 router.post("/", async (req, res) => {
