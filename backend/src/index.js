@@ -10,6 +10,7 @@ mainApp.use(express.json());
 mainApp.use(
   cors({
     origin: process.env.FE_ORIGIN,
+    credentials: true,
   })
 );
 

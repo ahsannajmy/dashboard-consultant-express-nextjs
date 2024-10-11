@@ -15,9 +15,9 @@ export const NavSide = (props) => {
           props.navState ? "" : "hidden"
         } top-16 sm:top-0 fixed sm:relative z-50 sm:flex min-h-screen w-2/3 sm:w-52 bg-primary text-secondary`}
       >
-        <div className="py-10 px-4 flex flex-col gap-4 sm:gap-0 h-full sm:justify-between">
+        <div className="py-10 px-4 flex flex-col gap-4 sm:gap-0 h-full w-full sm:justify-between">
           <section>
-            <span className="font-semibold text-lg">Consultant Management</span>
+            <span className="font-semibold text-2xl">ConsultHub</span>
             <div className="flex flex-col gap-4 mt-10">
               <div className="flex flex-col gap-2 sm:gap-4">
                 <NavItem name="Home" icon={HomeIcon} href="/" />
@@ -31,7 +31,13 @@ export const NavSide = (props) => {
             </div>
           </section>
           <section>
-            <NavItem name="Logout" icon={LogoutIcon} href="/auth/login" />
+            <div className="flex">
+              <NavItemLogout
+                name="Logout"
+                icon={LogoutIcon}
+                handler={props.handlerLogout}
+              />
+            </div>
           </section>
         </div>
       </nav>
@@ -54,6 +60,19 @@ export const NavUpper = (props) => {
         </div>
       </nav>
     </>
+  );
+};
+
+const NavItemLogout = ({ name, icon: Icon, handler }) => {
+  return (
+    <button
+      onClick={handler}
+      className="bg-transparent hover:bg-secondary text-secondary hover:text-primary
+    p-2 rounded-lg flex gap-2 items-center w-full"
+    >
+      <Icon className="w-5 h-5" />
+      <span>{name}</span>
+    </button>
   );
 };
 
