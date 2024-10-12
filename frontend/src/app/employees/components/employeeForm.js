@@ -1,5 +1,6 @@
 import {
   EmployeeDateInput,
+  EmployeeFileInput,
   EmployeeInput,
   EmployeeSelectInput,
   jabatan,
@@ -7,17 +8,22 @@ import {
   status_sertifikasi,
 } from "../components/input";
 
-export const EmployeeForm = () => {
+export const EmployeeForm = (props) => {
   return (
-    <>
-      <form>
+    <div>
+      <form onSubmit={props.submitHandler}>
         <div className="flex flex-col gap-4">
-          <span className="text-2xl font-semibold">Add New Employee</span>
+          <span className="text-2xl font-semibold text-center">
+            Add New Employee
+          </span>
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-2 w-full">
-              <EmployeeInput title="Nama" type="text" />
+              <EmployeeInput name="nama" title="Nama" type="text" />
             </div>
             <div className="flex flex-col gap-2 w-full">
+              <EmployeeInput name="email" title="Email" type="email" />
+            </div>
+            <div className="flex flex-col gap-2 w-full col-span-2">
               <EmployeeSelectInput
                 title="Jabatan"
                 name="jabatan"
@@ -51,14 +57,50 @@ export const EmployeeForm = () => {
               />
             </div>
           </div>
+          <div className="flex flex-col gap-2">
+            <span className="font-semibold text-xs">
+              * New Employee will automatically create new user
+            </span>
+            <span className="font-semibold text-xs">
+              * Inform your new employee to check the email for account
+              credentials
+            </span>
+          </div>
           <button
             type="submit"
-            className="p-2 rounded-lg  bg-button1 text-secondary max-w-fit"
+            className="px-3 py-2 rounded-lg  bg-button1 text-secondary max-w-fit"
           >
             Submit
           </button>
         </div>
       </form>
-    </>
+    </div>
+  );
+};
+
+export const EmployeeExcelForm = (props) => {
+  return (
+    <div>
+      <form onSubmit={props.submitHandler}>
+        <div className="flex flex-col gap-4">
+          <span className="text-2xl font-semibold text-center">
+            Add Employee With Excel
+          </span>
+          <div className="flex flex-col gap-2 w-full">
+            <EmployeeFileInput
+              name="excel-file"
+              title="Excel File"
+              fileType=".xlsx"
+            />
+          </div>
+          <button
+            type="submit"
+            className="px-3 py-2 rounded-lg  bg-button1 text-secondary max-w-fit"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };

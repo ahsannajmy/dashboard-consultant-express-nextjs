@@ -105,7 +105,7 @@ router.post("/", async (req, res) => {
     if (err.code === "P2002") {
       return res.status(500).send({
         status: "failed",
-        message: `User with field ${err.meta.target[0]} already exist`,
+        message: `User with ${err.meta.target[0]} field already exist`,
       });
     }
     return res.status(500).send({

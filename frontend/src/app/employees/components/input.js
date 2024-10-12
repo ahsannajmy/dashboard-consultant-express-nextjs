@@ -1,3 +1,7 @@
+"use client";
+import { useRef, useState } from "react";
+import { UploadIcon } from "./icon";
+
 export const EmployeeInput = (props) => {
   return (
     <>
@@ -44,6 +48,47 @@ export const EmployeeDateInput = (props) => {
         className="text-gray-500 rounded-md p-2 text-xs drop-shadow-lg"
         required
       ></input>
+    </>
+  );
+};
+
+export const EmployeeFileInput = (props) => {
+  const fileInputRef = useRef(null);
+  const [fileName, setFileName] = useState("");
+
+  const handleFileUpload = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFileName(file.name);
+    } else {
+      setFileName("");
+    }
+  };
+
+  return (
+    <>
+      <span>{props.title}</span>
+      <div
+        className="p-2 text-gray-500 text-xs flex gap-2 items-center rounded-lg bg-secondary drop-shadow-lg w-1/2 cursor-pointer"
+        onClick={handleFileUpload}
+      >
+        <UploadIcon className="w-4 h-4" />
+        <span>Upload file</span>
+        <input
+          type="file"
+          name={props.name}
+          className="hidden"
+          required
+          accept={props.fileType}
+          ref={fileInputRef}
+          onChange={handleFileChange}
+        ></input>
+      </div>
+      {fileName && <span className="text-gray-500 text-xs">{fileName}</span>}
     </>
   );
 };

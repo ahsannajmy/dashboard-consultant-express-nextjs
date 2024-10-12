@@ -22,8 +22,10 @@ rootRouter.get("/", async (req, res) => {
 });
 
 const userServices = require("./user/userController");
+const employeeServices = require("./employee/employeeController");
 
 rootRouter.use("/users", userServices);
+rootRouter.use("/employees", employeeServices);
 
 mainApp.use("/api/v1/dashboard-konsultan", rootRouter);
 
