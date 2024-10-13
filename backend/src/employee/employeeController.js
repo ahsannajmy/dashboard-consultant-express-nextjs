@@ -63,4 +63,37 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/", async (req, res) => {
+  const page = req.query.page;
+  const limit = 8;
+  const skip = (page - 1) * 8;
+  try {
+    const employeePaginationRes = await prisma.employer.findMany({
+      skip: skip,
+      take: limit,
+      orderBy: {
+        nama: "asc",
+      },
+    });
+
+    const totalEmployees = await prisma.employer.count();
+
+    return res.status(200).send({
+      status: "success",
+      message: "employee retrieved",
+      data: employeePaginationRes,
+      pagination: {
+        currentPage: parseInt(page),
+        totalPages: Math.ceil(totalEmployees / limit),
+        totalItems: totalEmployees,
+      },
+    });
+  } catch (err) {
+    return res.status(500).send({
+      status: "failed",
+      message: err.message,
+    });
+  }
+});
+
 module.exports = router;

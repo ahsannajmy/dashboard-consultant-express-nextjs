@@ -2,6 +2,7 @@ import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AuthProvider from "./context/authContext";
+import { NextUIProvider } from "@nextui-org/system";
 
 export const metadata = {
   title: "Dashboard Consultant",
@@ -12,8 +13,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <AuthProvider>{children}</AuthProvider>
-        <ToastContainer position="top-center" theme="dark" autoClose={1000} />
+        <NextUIProvider>
+          <AuthProvider>{children}</AuthProvider>
+          <ToastContainer position="top-center" theme="dark" autoClose={1000} />
+        </NextUIProvider>
       </body>
     </html>
   );
