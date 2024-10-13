@@ -5,18 +5,11 @@ export async function middleware(req) {
 
   const token = req.cookies.get("token");
 
-  if (
-    token &&
-    (pathname.startsWith("/auth/login") ||
-      pathname.startsWith("/auth/register"))
-  ) {
+  if (token && pathname.startsWith("/auth/login")) {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
-  if (
-    pathname.startsWith("/auth/login") ||
-    pathname.startsWith("/auth/register")
-  ) {
+  if (pathname.startsWith("/auth/login")) {
     return NextResponse.next();
   }
 

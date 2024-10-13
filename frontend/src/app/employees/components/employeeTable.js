@@ -8,7 +8,9 @@ import {
 } from "@nextui-org/table";
 import {
   employeeColumns,
+  enum_position_map,
   enum_status_regist_map,
+  enum_status_sertif_map,
   status_registrasi_color,
 } from "../utils/tableContent";
 import { Spinner } from "@nextui-org/spinner";
@@ -42,7 +44,7 @@ export const EmployeeTable = (props) => {
       >
         <TableHeader columns={employeeColumns}>
           {(column) => (
-            <TableColumn key={column.key}>
+            <TableColumn className="text-center" key={column.key}>
               <span className="text-xs font-semibold text-secondary">
                 {column.label}
               </span>
@@ -66,38 +68,38 @@ export const EmployeeTable = (props) => {
                   </Link>
                 </div>
               </TableCell>
-              <TableCell>
-                <div
-                  className={`py-1 px-2 rounded-md bg-${
+              <TableCell className="text-center">
+                <span
+                  className={`text-xs font-medium bg-${
                     status_registrasi_color[employee.status_registrasi]
-                  } max-w-fit`}
+                  } px-2 py-1 rounded-lg text-secondary`}
                 >
-                  <span className="text-xs font-medium text-secondary">
-                    {enum_status_regist_map[employee.status_registrasi]}
-                  </span>
-                </div>
-              </TableCell>
-              <TableCell>
-                <span className="text-xs font-medium">{employee.jabatan}</span>
+                  {enum_status_regist_map[employee.status_registrasi]}
+                </span>
               </TableCell>
               <TableCell className="text-center">
                 <span className="text-xs font-medium">
-                  {employee.status_sertifikasi}
+                  {enum_position_map[employee.jabatan]}
                 </span>
               </TableCell>
-              <TableCell>
+              <TableCell className="text-center">
+                <span className="text-xs font-medium">
+                  {enum_status_sertif_map[employee.status_sertifikasi]}
+                </span>
+              </TableCell>
+              <TableCell className="text-center">
                 <span className="text-xs font-medium">
                   {employee.status_kuasa_hukum
                     ? "KUASA HUKUM"
                     : "BUKAN KUASA HUKUM"}
                 </span>
               </TableCell>
-              <TableCell>
+              <TableCell className="text-center">
                 <span className="text-xs font-medium">
                   {employee.izin_berlaku_pengacara}
                 </span>
               </TableCell>
-              <TableCell className="rounded-r-lg">
+              <TableCell className="rounded-r-lg text-center">
                 <span className="text-xs font-medium">
                   {employee.izin_berlaku_konsultan}
                 </span>

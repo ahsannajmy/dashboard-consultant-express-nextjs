@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext } from "react";
-import { DashboardLayout } from "./components/dashboardLayout";
+import { DashboardLayout } from "./layout/dashboardLayout";
 import { UserIcon } from "./components/generalIcon";
 import { AuthContext } from "./context/authContext";
 import Link from "next/link";
@@ -21,7 +21,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="flex flex-row gap-2 items-center">
-                <Link href="/">
+                <Link href="/change-password">
                   <UserIcon className="w-5 h-5" />
                 </Link>
               </div>

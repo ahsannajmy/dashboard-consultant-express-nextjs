@@ -42,6 +42,7 @@ router.post("/login", async (req, res) => {
 
     const token = jwt.sign(
       {
+        id: user.id,
         nama: user.nama,
         email: user.email,
         role: user.role,
@@ -81,33 +82,49 @@ router.post("/logout", async (req, res) => {
   });
 });
 
-router.post("/", async (req, res) => {
-  const body = req.body;
+router.post("/change-password/:id", async (req, res) => {
+  const id = req.params.id;
+  const { oldPassword, newPassword } = req.body;
   try {
-    const user = await prisma.user.create({
-      data: {
-        nama: body.nama,
-        email: body.email,
-        password: await hashPassword(body.password),
-        role: body.role,
+    const user = await prisma.user.findUnique({
+      where: {
+        id: id,
       },
     });
-    return res.status(201).send({
-      status: "success",
-      message: "User created",
-      data: {
-        nama: user.nama,
-        email: user.email,
-        role: user.role,
-      },
-    });
-  } catch (err) {
-    if (err.code === "P2002") {
-      return res.status(500).send({
+
+    if (!user) {
+      return res.status(404).send({
         status: "failed",
-        message: `User with ${err.meta.target[0]} field already exist`,
+        message: "User not found",
       });
     }
+
+    const validateOldPassword = await bcrypt.compare(
+      oldPassword,
+      user.password
+    );
+
+    if (!validateOldPassword) {
+      return res.status(404).send({
+        status: "failed",
+        message: "Invalid credentials",
+      });
+    }
+
+    await prisma.user.update({
+      where: {
+        id: id,
+      },
+      data: {
+        password: await hashPassword(newPassword),
+      },
+    });
+
+    return res.status(200).send({
+      status: "success",
+      message: "Change password successfull",
+    });
+  } catch (err) {
     return res.status(500).send({
       status: "failed",
       message: err.message,

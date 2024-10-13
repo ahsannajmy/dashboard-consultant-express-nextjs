@@ -26,7 +26,7 @@ export const NavSide = (props) => {
                   icon={EmployeeIcon}
                   href="/employees"
                 />
-                <NavItem name="Projects" icon={ProjectIcon} href="/" />
+                <NavItem name="Projects" icon={ProjectIcon} href="/projects" />
               </div>
             </div>
           </section>

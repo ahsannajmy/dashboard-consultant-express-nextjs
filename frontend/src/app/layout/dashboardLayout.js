@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { NavSide, NavUpper } from "./navContent";
+import { NavSide, NavUpper } from "../components/navContent";
 import { fetchLogout } from "../auth/handler/apiHandler";
 import { useRouter } from "next/navigation";
 

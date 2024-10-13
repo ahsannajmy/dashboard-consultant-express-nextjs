@@ -1,8 +1,8 @@
 "use client";
 import { useRef, useState } from "react";
-import { UploadIcon } from "./icon";
+import { UploadIcon } from "./generalIcon";
 
-export const EmployeeInput = (props) => {
+export const MainInput = (props) => {
   return (
     <>
       <span>{props.title}</span>
@@ -11,13 +11,12 @@ export const EmployeeInput = (props) => {
         type={props.type}
         name={props.name}
         placeholder={props.title}
-        required
       ></input>
     </>
   );
 };
 
-export const EmployeeSelectInput = (props) => {
+export const MainSelectInput = (props) => {
   return (
     <>
       <span>{props.title}</span>
@@ -38,7 +37,7 @@ export const EmployeeSelectInput = (props) => {
   );
 };
 
-export const EmployeeDateInput = (props) => {
+export const MainDateInput = (props) => {
   return (
     <>
       <span>{props.title}</span>
@@ -52,7 +51,7 @@ export const EmployeeDateInput = (props) => {
   );
 };
 
-export const EmployeeFileInput = (props) => {
+export const MainFileInput = (props) => {
   const fileInputRef = useRef(null);
   const [fileName, setFileName] = useState("");
 
@@ -93,24 +92,17 @@ export const EmployeeFileInput = (props) => {
   );
 };
 
-export const jabatan = [
-  { key: "Partner", value: "PARTNER" },
-  { key: "Senior Manager", value: "SENIOR_MANAGER" },
-  { key: "Manager", value: "MANAGER" },
-  { key: "Assistant Manager", value: "ASSISTANT_MANAGER" },
-  { key: "Senior Specialist", value: "SENIOR_SPECIALIST" },
-  { key: "Specialist", value: "SPECIALIST" },
-  { key: "Admin", value: "ADMIN" },
-];
-
-export const status_sertifikasi = [
-  { key: "A", value: "A" },
-  { key: "B", value: "B" },
-  { key: "C", value: "C" },
-  { key: "Not a Tax Consultant", value: "NOT_A_TAX_CONSULTANT" },
-];
-
-export const status_kuasa_hukum = [
-  { key: "Kuasa Hukum", value: true },
-  { key: "Bukan Kuasa Hukum", value: false },
-];
+export const MainInputCheckbox = (props) => {
+  return (
+    <>
+      <div className="flex flex-row gap-2 items-center">
+        <input
+          type="checkbox"
+          className="accent-button1"
+          onChange={props.checkedHandler}
+        ></input>
+        <span className="text-gray-500 text-xs ">{props.title}</span>
+      </div>
+    </>
+  );
+};

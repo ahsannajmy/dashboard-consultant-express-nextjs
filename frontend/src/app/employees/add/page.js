@@ -1,9 +1,10 @@
 "use client";
 
-import { DashboardLayout } from "@/app/components/dashboardLayout";
+import { DashboardLayout } from "@/app/layout/dashboardLayout";
 
 import { EmployeeExcelForm, EmployeeForm } from "../components/employeeForm";
-import { fetchAddEmployee } from "../handler/apiHandler";
+
+import { formRequeest } from "@/app/handler/apiHandler";
 
 export default function EmployeeAdd() {
   async function addEmployeeHandler(e) {
@@ -15,7 +16,7 @@ export default function EmployeeAdd() {
     });
 
     try {
-      await fetchAddEmployee("/employees", "POST", JSON.stringify(formObject));
+      await formRequeest("/employees", "POST", JSON.stringify(formObject));
     } catch (err) {
       console.log(err.message);
     }

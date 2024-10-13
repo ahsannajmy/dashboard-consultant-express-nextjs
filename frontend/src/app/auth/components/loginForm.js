@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { AuthInput } from "./inputs";
+import { MainInput } from "@/app/components/input";
 
 export const LoginForm = (props) => {
   return (
@@ -9,10 +9,10 @@ export const LoginForm = (props) => {
           <span className="font-semibold text-2xl">{props.title}</span>
           <div className="flex flex-col gap-4 w-full">
             <div className="flex flex-col gap-2">
-              <AuthInput title="Email" type="email" name="email" />
+              <MainInput title="Email" type="email" name="email" />
             </div>
             <div className="flex flex-col gap-2">
-              <AuthInput title="Password" type="password" name="password" />
+              <MainInput title="Password" type="password" name="password" />
             </div>
           </div>
           <div className="flex flex-col items-center gap-4 w-full">
@@ -22,13 +22,6 @@ export const LoginForm = (props) => {
             >
               <span>Login</span>
             </button>
-            <span className="text-xs">Dont have an account ?</span>
-            <Link
-              href="/auth/register"
-              className="px-2 py-2 rounded-lg bg-primary hover:bg-primary/80 text-secondary w-full text-center"
-            >
-              <span className="text-center">Register</span>
-            </Link>
           </div>
         </div>
       </div>

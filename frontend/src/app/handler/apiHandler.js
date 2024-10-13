@@ -24,3 +24,25 @@ export const fetchData = async (endpoint, method) => {
     return err;
   }
 };
+
+export const formRequeest = async (endpoint, method, body) => {
+  try {
+    const res = await fetch(`${base_url}/${endpoint}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: method,
+      body: body,
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      return toast.error(data.message);
+    }
+
+    return toast.success(data.message);
+  } catch (err) {
+    return err;
+  }
+};
