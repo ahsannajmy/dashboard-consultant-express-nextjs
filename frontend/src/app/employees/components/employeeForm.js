@@ -1,3 +1,5 @@
+"use client";
+
 import {
   MainDateInput,
   MainFileInput,
@@ -9,8 +11,21 @@ import {
   status_kuasa_hukum,
   status_sertifikasi,
 } from "../utils/employeeValueMapper";
+import { useState } from "react";
+import { MainSubmitButton } from "@/app/components/button";
 
 export const EmployeeForm = (props) => {
+  const [statusSertifikasi, setStatusSertifikasi] = useState("");
+  const [statusKuasaHukum, setStatusKuasaHukum] = useState("");
+
+  const handleSertifikasiChange = (e) => {
+    setStatusSertifikasi(e.target.value);
+  };
+
+  const handleKuasaHukumChange = (e) => {
+    setStatusKuasaHukum(e.target.value);
+  };
+
   return (
     <div>
       <form onSubmit={props.submitHandler}>
@@ -37,6 +52,7 @@ export const EmployeeForm = (props) => {
                 title="Status Sertifikasi"
                 name="status_sertifikasi"
                 selectItems={status_sertifikasi}
+                onChange={(e) => handleSertifikasiChange(e)}
               />
             </div>
             <div className="flex flex-col gap-2 w-full">
@@ -44,18 +60,21 @@ export const EmployeeForm = (props) => {
                 title="Status Kuasa Hukum"
                 name="status_kuasa_hukum"
                 selectItems={status_kuasa_hukum}
+                onChange={(e) => handleKuasaHukumChange(e)}
               />
             </div>
             <div className="flex flex-col gap-2 w-full">
               <MainDateInput
                 title="Izin Berlaku Pengacara"
                 name="izin_berlaku_pengacara"
+                disabled={statusSertifikasi === "NOT_A_TAX_CONSULTANT"}
               />
             </div>
             <div className="flex flex-col gap-2 w-full">
               <MainDateInput
                 title="Izin Berlaku Konsultan"
                 name="izin_berlaku_konsultan"
+                disabled={statusKuasaHukum === "false"}
               />
             </div>
           </div>
@@ -68,12 +87,7 @@ export const EmployeeForm = (props) => {
               credentials
             </span>
           </div>
-          <button
-            type="submit"
-            className="px-3 py-2 rounded-lg  bg-button1 text-secondary max-w-fit"
-          >
-            Submit
-          </button>
+          <MainSubmitButton>Submit</MainSubmitButton>
         </div>
       </form>
     </div>
@@ -95,12 +109,7 @@ export const EmployeeExcelForm = (props) => {
               fileType=".xlsx"
             />
           </div>
-          <button
-            type="submit"
-            className="px-3 py-2 rounded-lg  bg-button1 text-secondary max-w-fit"
-          >
-            Submit
-          </button>
+          <MainSubmitButton>Submit</MainSubmitButton>
         </div>
       </form>
     </div>

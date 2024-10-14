@@ -25,6 +25,7 @@ export const EmployeeTable = (props) => {
         classNames={{
           th: "bg-button1",
         }}
+        isStriped
         bottomContent={
           props.totalPage > 1 ? (
             <div className="flex justify-center w-full">
@@ -63,16 +64,17 @@ export const EmployeeTable = (props) => {
               <TableCell className="rounded-l-lg">
                 <div className="flex flex-col gap-1">
                   <span className="text-xs font-medium">{employee.nama}</span>
-                  <Link href="/employee.id">
+                  <Link href={`/employees/${employee.id}`}>
                     <span className="text-gray-500 text-xs">More..</span>
                   </Link>
                 </div>
               </TableCell>
               <TableCell className="text-center">
                 <span
-                  className={`text-xs font-medium bg-${
-                    status_registrasi_color[employee.status_registrasi]
-                  } px-2 py-1 rounded-lg text-secondary`}
+                  className={`
+                    text-xs font-medium ${
+                      status_registrasi_color[employee.status_registrasi]
+                    } px-2 py-1 rounded-lg text-secondary`}
                 >
                   {enum_status_regist_map[employee.status_registrasi]}
                 </span>

@@ -25,6 +25,7 @@ model User {
   email String @unique
   password String
   role UserRole
+  employer Employer?
 }
 
 enum EmployerRegistrationStatus {
@@ -57,6 +58,8 @@ model Employer {
   jabatan Position
   status_sertifikasi SertificationStatus
   status_kuasa_hukum Boolean
-  izin_berlaku_pengacara DateTime
-  izin_berlaku_konsultan DateTime
+  izin_berlaku_pengacara DateTime?
+  izin_berlaku_konsultan DateTime?
+  user User @relation(fields: [userId], references: [id])
+  userId String @unique
 }

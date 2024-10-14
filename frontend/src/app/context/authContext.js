@@ -6,6 +6,7 @@ export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
   const [userData, setUserData] = useState({});
+  const [userDataLoading, setUserDataLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -13,10 +14,11 @@ export default function AuthProvider({ children }) {
       const decodedToken = jwtDecode(token);
       setUserData(decodedToken);
     }
+    setUserDataLoading(false);
   }, []);
 
   return (
-    <AuthContext.Provider value={{ userData, setUserData }}>
+    <AuthContext.Provider value={{ userData, setUserData, userDataLoading }}>
       {children}
     </AuthContext.Provider>
   );

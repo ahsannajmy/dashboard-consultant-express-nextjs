@@ -23,6 +23,7 @@ export const MainSelectInput = (props) => {
       <select
         className="text-gray-500 rounded-md p-2 text-xs drop-shadow-lg"
         required
+        onChange={props.onChange}
         name={props.name}
       >
         {props.selectItems.map((item, index) => (
@@ -46,6 +47,7 @@ export const MainDateInput = (props) => {
         name={props.name}
         className="text-gray-500 rounded-md p-2 text-xs drop-shadow-lg"
         required
+        disabled={props.disabled}
       ></input>
     </>
   );

@@ -9,6 +9,7 @@ module.exports = {
     "./node_modules/@nextui-org/theme/dist/components/table.js",
     "./node_modules/@nextui-org/theme/dist/components/spinner.js",
     "./node_modules/@nextui-org/theme/dist/components/pagination.js",
+    "./node_modules/@nextui-org/theme/dist/components/skeleton.js",
   ],
   theme: {
     extend: {

@@ -30,9 +30,9 @@ export const employeeColumns = [
 ];
 
 export const status_registrasi_color = {
-  PENDING: "neutral",
-  ACCEPTED: "success",
-  NEED_REVISION: "warning",
+  PENDING: "bg-neutral",
+  ACCEPTED: "bg-success",
+  NEED_REVISION: "bg-warning",
 };
 
 export const enum_status_regist_map = {

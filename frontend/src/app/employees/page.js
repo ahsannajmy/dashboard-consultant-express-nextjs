@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { fetchData } from "../handler/apiHandler";
 import { MainLinkButton } from "../components/button";
 import { Spinner } from "@nextui-org/spinner";
+import { formatDate } from "./utils/formatDate";
 
 export default function EmployeePage() {
   const [employeeData, setEmployeeData] = useState([]);
@@ -37,12 +38,6 @@ export default function EmployeePage() {
     } finally {
       setIsLoading(false);
     }
-  }
-
-  function formatDate(dateString) {
-    const options = { day: "numeric", month: "long", year: "numeric" };
-    const date = new Date(dateString);
-    return date.toLocaleDateString("id-ID", options);
   }
 
   return (

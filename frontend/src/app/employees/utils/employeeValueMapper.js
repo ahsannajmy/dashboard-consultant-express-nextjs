@@ -12,7 +12,7 @@ export const status_sertifikasi = [
   { key: "A", value: "A" },
   { key: "B", value: "B" },
   { key: "C", value: "C" },
-  { key: "Not a Tax Consultant", value: "NOT_A_TAX_CONSULTANT" },
+  { key: "Bukan Konsultan Pajak", value: "NOT_A_TAX_CONSULTANT" },
 ];
 
 export const status_kuasa_hukum = [

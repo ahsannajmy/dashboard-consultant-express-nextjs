@@ -12,36 +12,31 @@ router.post("/", async (req, res) => {
 
   try {
     await prisma.$transaction(async (prisma) => {
+      const user = await prisma.user.create({
+        data: {
+          nama: body.nama,
+          email: body.email,
+          password: await hashPassword(genPassword),
+          role: body.jabatan === "ADMIN" ? "ADMIN" : "BASE",
+        },
+      });
+
       await prisma.employer.create({
         data: {
           nama: body.nama,
-          status_registrasi: "PENDING",
           jabatan: body.jabatan,
           status_sertifikasi: body.status_sertifikasi,
           status_kuasa_hukum: status_kuasa_hukum,
-          izin_berlaku_konsultan: new Date(body.izin_berlaku_konsultan),
-          izin_berlaku_pengacara: new Date(body.izin_berlaku_pengacara),
+          izin_berlaku_konsultan: body.izin_berlaku_konsultan
+            ? new Date(body.izin_berlaku_konsultan)
+            : null,
+          izin_berlaku_pengacara: body.izin_berlaku_pengacara
+            ? new Date(body.izin_berlaku_pengacara)
+            : null,
+          userId: user.id,
         },
       });
-      if (body.jabatan === "ADMIN") {
-        await prisma.user.create({
-          data: {
-            nama: body.nama,
-            email: body.email,
-            password: await hashPassword(genPassword),
-            role: "ADMIN",
-          },
-        });
-      } else {
-        await prisma.user.create({
-          data: {
-            nama: body.nama,
-            email: body.email,
-            password: await hashPassword(genPassword),
-            role: "BASE",
-          },
-        });
-      }
+
       await sendEmail(body.email, genPassword);
     });
 
@@ -96,4 +91,24 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const employee = await prisma.employer.findUnique({
+      where: {
+        id: id,
+      },
+    });
+    return res.status(200).send({
+      status: "success",
+      message: "Employee retrieved",
+      data: employee,
+    });
+  } catch (err) {
+    return res.status(500).send({
+      status: "failed",
+      message: err.message,
+    });
+  }
+});
 module.exports = router;

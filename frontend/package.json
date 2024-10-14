@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@nextui-org/pagination": "^2.0.36",
+    "@nextui-org/skeleton": "^2.0.32",
     "@nextui-org/spinner": "^2.0.34",
     "@nextui-org/system": "^2.2.6",
     "@nextui-org/table": "^2.0.40",
